@@ -1,0 +1,124 @@
+/* ======== Global Styles ======== */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: #e2e8f0;
+    background-image: radial-gradient(#334155 1px, transparent 1px);
+    background-size: 30px 30px;
+    overflow-x: hidden;
+}
+
+a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* ======== Login Box ======== */
+.login-box {
+    width: 340px;
+    padding: 30px 25px;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(30, 41, 59, 0.9),
+      rgba(30, 41, 59, 0.9) 10px,
+      rgba(40, 50, 70, 0.9) 10px,
+      rgba(40, 50, 70, 0.9) 20px
+    ); /* Patterned fill */
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #f8fafc;
+}
+
+/* ======== Input Fields ======== */
+input[type="text"],
+input[type="password"] {
+    margin: 12px 0;
+    width: 100%;
+    padding: 12px;
+    background-color: #1e293b;
+    border: 1px solid #475569;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #f1f5f9;
+}
+
+input:focus {
+    border-color: #3b82f6;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+}
+
+/* ======== Remember Me ======== */
+.remember-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: #cbd5e1;
+}
+
+.remember-group input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #3b82f6;
+    cursor: pointer;
+}
+
+/* ======== Buttons ======== */
+button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to right, #2563eb, #1e40af);
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background: linear-gradient(to right, #1d4ed8, #1e3a8a);
+    transform: scale(1.02);
+}
+
+/* ======== Error Message ======== */
+.error {
+    color: #f87171;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* ======== Responsive (Optional) ======== */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .login-box {
+        width: 100%;
+        max-width: 360px;
+    }
+}

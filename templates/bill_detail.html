@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bill Details - {{ bill_number }}</title>
+</head>
+<body>
+    <h2>Bill Details: {{ bill_number }}</h2>
+    {{ table|safe }}
+    <br><br>
+    <a href="/index">Back</a> |
+    <a href="/logout">Logout</a>
+</body>
+</html>

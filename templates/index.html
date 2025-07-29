@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Nathan - Wholesale Bill Export</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 30%;
+            background: #1e293b;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 1px solid #334155;
+        }
+
+        .sidebar h2, .sidebar h3 {
+            color: #e2e8f0;
+            margin-bottom: 15px;
+        }
+
+        .bill-item {
+            background: #334155;
+            padding: 14px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .bill-item:hover {
+            background: #475569;
+        }
+
+        .bill-item span {
+            display: inline-block;
+            margin-right: 10px;
+            font-weight: 500;
+        }
+
+        .content {
+            width: 75%;
+            padding: 32px;
+            overflow-y: auto;
+        }
+
+        .bill-details {
+            background: #1e293b;
+            padding: 24px;
+            border-radius: 10px;
+            box-shadow: 0 0 0 1px #334155;
+            overflow-x: auto;
+        }
+
+        .bill-details h2 {
+            margin-top: 0;
+            color: #f8fafc;
+        }
+
+        #billTable table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            color: #f1f5f9;
+            min-width: 900px;
+        }
+
+        #billTable th, #billTable td {
+            padding: 10px;
+            border: 1px solid #475569;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .btn-group {
+            position: relative;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background-color: #2563eb;
+            color: #f8fafc;
+            padding: 10px 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            min-width: 160px;
+            z-index: 1;
+            border-radius: 6px;
+        }
+
+        .dropdown-menu a {
+            color: #f8fafc;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #334155;
+        }
+
+        .btn-group:hover .dropdown-menu {
+            display: block;
+        }
+
+        .icon-excel { color: #22c55e; }
+        .icon-csv { color: #0ea5e9; }
+        .icon-txt { color: #94a3b8; }
+
+        a.logout-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        a.logout-link:hover {
+            text-decoration: underline;
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar, .content {
+                width: 100%;
+                height: auto;
+            }
+            .bill-details {
+                overflow-x: auto;
+            }
+        }
+    </style>
+    <script>
+        async function loadBill(billNo) {
+            try {
+                const response = await fetch(`/api/bill/${billNo}`);
+                const data = await response.json();
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+                document.getElementById("billTitle").textContent = `Bill No: ${billNo}`;
+                document.getElementById("billDate").textContent = `Date: ${data.date}`;
+                document.getElementById("billAmount").textContent = `Amount: ₹${data.amount}`;
+                document.getElementById("billTable").innerHTML = data.html;
+
+                document.getElementById("downloadCSV").href = `/download/${billNo}/csv`;
+                document.getElementById("downloadXLSX").href = `/download/${billNo}/xlsx`;
+                document.getElementById("downloadTXT").href = `/download/${billNo}/txt`;
+            } catch (err) {
+                alert("❌ Failed to load bill details");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Welcome, {{ session['user'] }}</h2>
+        <h3>Bill List</h3>
+        {% for bill in bill_data %}
+        <div class="bill-item" onclick="loadBill('{{ bill.bill_no }}')">
+            <span>{{ bill.date }}</span>
+            <span>{{ bill.bill_no }}</span>
+            <span>₹{{ bill.amount }}</span>
+        </div>
+        {% endfor %}
+        <a href="/?logout=1" class="logout-link">🔓 Logout</a>
+    </div>
+
+    <div class="content">
+        <div class="bill-details">
+            <h2 id="billTitle">Select a bill to view details</h2>
+            <p id="billDate">Date: -</p>
+            <p id="billAmount">Amount: ₹-</p>
+            <div id="billTable"></div>
+
+            <div class="btn-group">
+                <button class="btn"><i class="fa fa-download"></i> Download</button>
+                <div class="dropdown-menu">
+                    <a id="downloadXLSX" href="#"><i class="fa-solid fa-file-excel icon-excel"></i> XLSX</a>
+                    <a id="downloadCSV" href="#"><i class="fa-solid fa-file-csv icon-csv"></i> CSV</a>
+                    <a id="downloadTXT" href="#"><i class="fa-solid fa-file-lines icon-txt"></i> TXT</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
