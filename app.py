@@ -210,27 +210,37 @@ def trigger_fetch():
         return "Unauthorized", 403
 
     try:
-        # Step 1: Fetch data from VB.NET API
+        # Step 1: Call VB.NET API
         response = requests.get("http://122.252.246.181:8080/fetch", timeout=10)
         fetched_data = response.text
 
-        # Step 2: Save to a file
-        with open("output.json", "w", encoding="utf-8") as f:
-            f.write(fetched_data)
+        # Step 2: Copy BillData.csv into current repo folder (optional if already inside repo)
+        src_path = r"D:\VBDOTNET\BillExportWeb\uploads\BillData.csv"
+        dst_path = os.path.join(os.getcwd(), 'uploads', 'BillData.csv')  # target inside repo
+
+        # Ensure uploads folder exists in repo
+        os.makedirs(os.path.dirname(dst_path), exist_ok=True)
+        with open(src_path, 'rb') as src_file:
+            with open(dst_path, 'wb') as dst_file:
+                dst_file.write(src_file.read())
 
         # Step 3: Git commit and push
-        repo_path = os.path.abspath(".")
-        subprocess.run(["git", "config", "user.name", "JanaPonnusamy"], cwd=repo_path)
-        subprocess.run(["git", "config", "user.email", "janaponnusamy@gmail.com"], cwd=repo_path)
-        subprocess.run(["git", "add", "output.json"], cwd=repo_path)
-        subprocess.run(["git", "commit", "-m", "Auto-update from VB.NET"], cwd=repo_path)
-        subprocess.run(["git", "push", "origin", "main"], cwd=repo_path)
+        repo_path = os.getcwd()
+        subprocess.run(["git", "config", "user.name", "JanaPonnusamy"], cwd=repo_path, check=True)
+        subprocess.run(["git", "config", "user.email", "janaponnusamy@gmail.com"], cwd=repo_path, check=True)
+        subprocess.run(["git", "add", "uploads/BillData.csv"], cwd=repo_path, check=True)
+        subprocess.run(["git", "commit", "-m", "Auto-update BillData.csv from VB.NET"], cwd=repo_path, check=True)
+        subprocess.run(["git", "push", "origin", "main"], cwd=repo_path, check=True)
 
-        return f"✅ VB.NET responded: {fetched_data}"
+        return f"✅ Data fetched & pushed to GitHub. VB.NET says: {fetched_data}"
+
+    except subprocess.CalledProcessError as git_err:
+        app.logger.exception("❌ Git command failed")
+        return f"❌ Git error: {git_err}", 500
 
     except Exception as e:
-        app.logger.exception("Git push failed")
-        return f"❌ Failed to fetch from VB.NET: {str(e)}", 500
+        app.logger.exception("❌ Fetch failed")
+        return f"❌ Failed to fetch or push: {str(e)}", 500
 
 
 @app.errorhandler(404)
