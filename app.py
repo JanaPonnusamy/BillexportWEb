@@ -211,7 +211,7 @@ def trigger_fetch():
 
     try:
         # Step 1: Fetch data from VB.NET API
-        response = requests.get("http://localhost:8080/fetch", timeout=10)
+        response = requests.get("http://122.252.246.181:8080/fetch", timeout=10)
         fetched_data = response.text
 
         # Step 2: Save to a file
@@ -220,8 +220,8 @@ def trigger_fetch():
 
         # Step 3: Git commit and push
         repo_path = os.path.abspath(".")
-        subprocess.run(["git", "config", "user.name", "Nathan Auto"], cwd=repo_path)
-        subprocess.run(["git", "config", "user.email", "nathan@example.com"], cwd=repo_path)
+        subprocess.run(["git", "config", "user.name", "JanaPonnusamy"], cwd=repo_path)
+        subprocess.run(["git", "config", "user.email", "janaponnusamy@gmail.com"], cwd=repo_path)
         subprocess.run(["git", "add", "output.json"], cwd=repo_path)
         subprocess.run(["git", "commit", "-m", "Auto-update from VB.NET"], cwd=repo_path)
         subprocess.run(["git", "push", "origin", "main"], cwd=repo_path)

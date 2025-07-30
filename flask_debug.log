@@ -2826,3 +2826,11 @@
 2025-07-29 20:30:45,827 - INFO - 127.0.0.1 - - [29/Jul/2025 20:30:45] "GET /api/bill/W01000887 HTTP/1.1" 200 -
 2025-07-29 20:31:04,190 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
 2025-07-29 20:31:04,196 - INFO - 127.0.0.1 - - [29/Jul/2025 20:31:04] "GET /api/bill/W01000892 HTTP/1.1" 200 -
+2025-07-30 20:30:42,894 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.10.73:5000
+2025-07-30 20:30:42,907 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-30 20:30:42,909 - INFO -  * Restarting with stat
+2025-07-30 20:30:44,603 - WARNING -  * Debugger is active!
+2025-07-30 20:30:44,611 - INFO -  * Debugger PIN: 550-661-258
