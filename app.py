@@ -8,7 +8,6 @@ import csv
 import chardet
 import subprocess
 
-
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
@@ -18,25 +17,34 @@ ALLOWED_EXTENSIONS = {'csv', 'xlsx', 'txt'}
 logging.basicConfig(filename='flask_debug.log', level=logging.DEBUG,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
+# === GitHub Raw CSV File URL ===
+GITHUB_CSV_URL = 'https://raw.githubusercontent.com/JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv'
+
 def load_users():
     with open("users.json") as f:
         return json.load(f)
 
-
 def load_bill_dataframe(filepath):
     # Detect encoding
-    with open(filepath, 'rb') as f:
-        result = chardet.detect(f.read())
-    encoding = result['encoding']
+    if filepath.startswith("http"):
+        response = requests.get(filepath)
+        response.raise_for_status()
+        raw_data = response.content
+        encoding = chardet.detect(raw_data)['encoding']
+        content = raw_data.decode(encoding).replace('""', '"')
+    else:
+        with open(filepath, 'rb') as f:
+            result = chardet.detect(f.read())
+        encoding = result['encoding']
+        with open(filepath, 'r', encoding=encoding) as f:
+            content = f.read().replace('""', '"')
 
-    # Read and clean quotes
-    with open(filepath, 'r', encoding=encoding) as f:
-        content = f.read().replace('""', '"')
-
-    temp_path = filepath + '_clean.csv'
+    # Save clean temp file
+    temp_path = os.path.join(UPLOAD_FOLDER, 'BillData_clean.csv')
     with open(temp_path, 'w', encoding=encoding) as f:
         f.write(content)
 
+    # Detect delimiter
     first_line = content.splitlines()[0]
     if '\t' in first_line:
         delimiter = '\t'
@@ -48,30 +56,23 @@ def load_bill_dataframe(filepath):
         delimiter = ','
 
     df = pd.read_csv(temp_path, sep=delimiter, engine='python', quoting=csv.QUOTE_NONE)
-
-    # Clean column names
     df.columns = df.columns.str.strip().str.replace('"', '', regex=False).str.replace("'", '', regex=False)
 
-    # Clean string cells
     for col in df.select_dtypes(include='object').columns:
         df[col] = df[col].astype(str).apply(lambda x: x.replace('"', '').strip())
 
-    # Convert dates to short format
     for col in ['TransactionDate', 'BillDate']:
         if col in df.columns:
             df[col] = pd.to_datetime(df[col], errors='coerce', dayfirst=True).dt.strftime('%d/%m/%y')
 
-    # Remove exact duplicates
     df.drop_duplicates(inplace=True)
 
-    # Convert numeric columns
     for col in ['BillAmount', 'PurchasePrice', 'DiscountPercentage', 'MRP']:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
 
     app.logger.debug(f"✅ Final cleaned columns: {df.columns.tolist()}")
     return df
-
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
@@ -90,7 +91,6 @@ def login():
         return render_template('login.html', error="Invalid username or password")
     return render_template('login.html')
 
-
 @app.route('/logout')
 def logout():
     session.pop('user', None)
@@ -104,12 +104,8 @@ def index():
     if session['user'] == 'admin':
         return render_template('admin.html')
 
-    filepath = os.path.join(UPLOAD_FOLDER, 'BillData.csv')
-    if not os.path.exists(filepath):
-        return "❌ BillData.csv not found", 404
-
     try:
-        df = load_bill_dataframe(filepath)
+        df = load_bill_dataframe(GITHUB_CSV_URL)
     except Exception as e:
         return f"❌ Error loading CSV: {e}", 500
 
@@ -132,22 +128,15 @@ def index():
             'amount': float(bill_amount)
         })
 
-    return render_template('index.html',
-                           session=session,
-                           bill_data=bill_data_summary)
-
+    return render_template('index.html', session=session, bill_data=bill_data_summary)
 
 @app.route('/api/bill/<bill_no>')
 def api_bill_detail(bill_no):
     if 'user' not in session:
         return jsonify({'error': 'Unauthorized'}), 403
 
-    filepath = os.path.join(UPLOAD_FOLDER, 'BillData.csv')
-    if not os.path.exists(filepath):
-        return jsonify({'error': 'BillData.csv not found'}), 404
-
     try:
-        df = load_bill_dataframe(filepath)
+        df = load_bill_dataframe(GITHUB_CSV_URL)
 
         if 'BNumber' not in df.columns:
             return jsonify({'error': 'Missing BNumber in CSV'}), 500
@@ -178,11 +167,11 @@ def download(bill_number, ext):
     if ext not in ALLOWED_EXTENSIONS:
         return "Invalid file type", 400
 
-    filepath = os.path.join(UPLOAD_FOLDER, 'BillData.csv')
-    if not os.path.exists(filepath):
-        return "BillData.csv not found", 404
+    try:
+        df = load_bill_dataframe(GITHUB_CSV_URL)
+    except Exception as e:
+        return f"Error loading data: {e}", 500
 
-    df = load_bill_dataframe(filepath)
     if 'BNumber' not in df.columns:
         return "Missing 'BNumber' column", 500
 
@@ -193,6 +182,9 @@ def download(bill_number, ext):
     bill_number_clean = bill_number.replace('"', '').replace("'", '')
     temp_file = os.path.join(UPLOAD_FOLDER, f"Bill_{bill_number_clean}.{ext}")
 
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.makedirs(UPLOAD_FOLDER)
+
     if ext == 'csv':
         selected.to_csv(temp_file, index=False)
     elif ext == 'xlsx':
@@ -202,46 +194,21 @@ def download(bill_number, ext):
 
     return send_from_directory(UPLOAD_FOLDER, os.path.basename(temp_file), as_attachment=True)
 
-from flask import Response
-
 @app.route('/trigger-fetch', methods=['GET'])
 def trigger_fetch():
     if 'user' not in session or session['user'] != 'admin':
         return "Unauthorized", 403
 
     try:
-        # Step 1: Call VB.NET API
+        # Step 1: Call VB.NET API to trigger export
         response = requests.get("http://122.252.246.181:8080/fetch", timeout=10)
         fetched_data = response.text
 
-        # Step 2: Copy BillData.csv into current repo folder (optional if already inside repo)
-        src_path = r"D:\VBDOTNET\BillExportWeb\uploads\BillData.csv"
-        dst_path = os.path.join(os.getcwd(), 'uploads', 'BillData.csv')  # target inside repo
-
-        # Ensure uploads folder exists in repo
-        os.makedirs(os.path.dirname(dst_path), exist_ok=True)
-        with open(src_path, 'rb') as src_file:
-            with open(dst_path, 'wb') as dst_file:
-                dst_file.write(src_file.read())
-
-        # Step 3: Git commit and push
-        repo_path = os.getcwd()
-        subprocess.run(["git", "config", "user.name", "JanaPonnusamy"], cwd=repo_path, check=True)
-        subprocess.run(["git", "config", "user.email", "janaponnusamy@gmail.com"], cwd=repo_path, check=True)
-        subprocess.run(["git", "add", "uploads/BillData.csv"], cwd=repo_path, check=True)
-        subprocess.run(["git", "commit", "-m", "Auto-update BillData.csv from VB.NET"], cwd=repo_path, check=True)
-        subprocess.run(["git", "push", "origin", "main"], cwd=repo_path, check=True)
-
-        return f"✅ Data fetched & pushed to GitHub. VB.NET says: {fetched_data}"
-
-    except subprocess.CalledProcessError as git_err:
-        app.logger.exception("❌ Git command failed")
-        return f"❌ Git error: {git_err}", 500
+        return f"✅ VB.NET triggered. Status: {fetched_data}"
 
     except Exception as e:
         app.logger.exception("❌ Fetch failed")
-        return f"❌ Failed to fetch or push: {str(e)}", 500
-
+        return f"❌ Failed to fetch from VB.NET: {str(e)}", 500
 
 @app.errorhandler(404)
 def page_not_found(e):
