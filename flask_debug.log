@@ -2834,3 +2834,104 @@
 2025-07-30 20:30:42,909 - INFO -  * Restarting with stat
 2025-07-30 20:30:44,603 - WARNING -  * Debugger is active!
 2025-07-30 20:30:44,611 - INFO -  * Debugger PIN: 550-661-258
+2025-08-07 15:53:35,065 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.10.73:5000
+2025-08-07 15:53:35,074 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-07 15:53:35,076 - INFO -  * Restarting with stat
+2025-08-07 15:53:36,297 - WARNING -  * Debugger is active!
+2025-08-07 15:53:36,302 - INFO -  * Debugger PIN: 550-661-258
+2025-08-07 15:53:54,538 - INFO - 127.0.0.1 - - [07/Aug/2025 15:53:54] "GET / HTTP/1.1" 200 -
+2025-08-07 15:53:55,376 - INFO - 127.0.0.1 - - [07/Aug/2025 15:53:55] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-08-07 15:54:04,389 - INFO - 127.0.0.1 - - [07/Aug/2025 15:54:04] "[32mPOST / HTTP/1.1[0m" 302 -
+2025-08-07 15:54:04,670 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:54:05,691 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:54:05,792 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:54:05,813 - INFO - 127.0.0.1 - - [07/Aug/2025 15:54:05] "GET /index HTTP/1.1" 200 -
+2025-08-07 15:54:10,464 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:54:10,645 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:54:10,691 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:54:10,705 - INFO - 127.0.0.1 - - [07/Aug/2025 15:54:10] "GET /api/bill/W01001002 HTTP/1.1" 200 -
+2025-08-07 15:55:46,573 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:55:46,799 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:55:50,545 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:55:50,711 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:55:54,446 - INFO - 127.0.0.1 - - [07/Aug/2025 15:55:54] "GET /?logout=1 HTTP/1.1" 200 -
+2025-08-07 15:56:00,779 - INFO - 127.0.0.1 - - [07/Aug/2025 15:56:00] "[32mPOST / HTTP/1.1[0m" 302 -
+2025-08-07 15:56:01,094 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:56:01,255 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:56:07,951 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:56:08,119 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:56:10,033 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:56:10,193 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:56:11,552 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:56:11,711 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:56:29,710 - INFO - 127.0.0.1 - - [07/Aug/2025 15:56:29] "[32mPOST / HTTP/1.1[0m" 302 -
+2025-08-07 15:56:30,028 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:56:30,191 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:57:06,780 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:06] "[32mPOST / HTTP/1.1[0m" 302 -
+2025-08-07 15:57:06,786 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:57:06,952 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:57:11,613 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:11] "GET /?logout=1 HTTP/1.1" 200 -
+2025-08-07 15:57:18,039 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:18] "[32mPOST / HTTP/1.1[0m" 302 -
+2025-08-07 15:57:18,354 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:57:18,524 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:57:24,877 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:57:24,889 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:24] "GET /api/bill/W01000998 HTTP/1.1" 200 -
+2025-08-07 15:57:24,911 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:57:24,926 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:24] "GET /api/bill/W01001001 HTTP/1.1" 200 -
+2025-08-07 15:57:24,936 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:57:24,941 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:57:24,945 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:24] "GET /api/bill/W01000998 HTTP/1.1" 200 -
+2025-08-07 15:57:24,954 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:24] "GET /api/bill/W01001001 HTTP/1.1" 200 -
+2025-08-07 15:57:24,958 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:57:24,961 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:57:24,963 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:57:24,972 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:24] "GET /index HTTP/1.1" 200 -
+2025-08-07 15:57:24,976 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:24] "GET /index HTTP/1.1" 200 -
+2025-08-07 15:57:24,980 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:24] "GET /index HTTP/1.1" 200 -
+2025-08-07 15:57:24,993 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:57:25,000 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:57:25,012 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:25] "GET /index HTTP/1.1" 200 -
+2025-08-07 15:57:25,028 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:25] "GET /api/bill/W01001001 HTTP/1.1" 200 -
+2025-08-07 15:57:28,905 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:57:29,068 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:57:29,132 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:57:29,139 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:29] "GET /api/bill/W01001001 HTTP/1.1" 200 -
+2025-08-07 15:57:30,322 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:57:30,484 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:57:30,535 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:57:30,547 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:30] "GET /api/bill/W01001002 HTTP/1.1" 200 -
+2025-08-07 15:57:31,880 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:57:32,035 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:57:32,057 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:57:32,062 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:32] "GET /api/bill/W01000998 HTTP/1.1" 200 -
+2025-08-07 15:57:34,097 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:57:34,257 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:57:34,295 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:57:34,300 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:34] "GET /api/bill/W01000994 HTTP/1.1" 200 -
+2025-08-07 15:57:35,954 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:57:36,116 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:57:36,142 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:57:36,147 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:36] "GET /api/bill/W01000993 HTTP/1.1" 200 -
+2025-08-07 15:57:38,777 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:57:38,950 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:57:39,001 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:57:39,014 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:39] "GET /api/bill/W01000989 HTTP/1.1" 200 -
+2025-08-07 15:57:43,059 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:57:43,227 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:57:43,272 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:57:43,285 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:43] "GET /api/bill/W01000989 HTTP/1.1" 200 -
+2025-08-07 15:57:44,969 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:57:45,133 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:57:45,198 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:57:45,208 - INFO - 127.0.0.1 - - [07/Aug/2025 15:57:45] "GET /api/bill/W01000988 HTTP/1.1" 200 -
+2025-08-07 15:59:58,821 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 15:59:59,228 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 15:59:59,277 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 15:59:59,282 - INFO - 127.0.0.1 - - [07/Aug/2025 15:59:59] "GET /api/bill/W01000994 HTTP/1.1" 200 -
+2025-08-07 16:00:01,161 - DEBUG - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2025-08-07 16:00:01,317 - DEBUG - https://raw.githubusercontent.com:443 "GET /JanaPonnusamy/BillexportWEb/main/uploads/BillData.csv HTTP/1.1" 200 8295
+2025-08-07 16:00:01,370 - DEBUG - \u2705 Final cleaned columns: ['ProductCode', 'ProductName', 'Quantity', 'StripQty', 'SaleUnit', 'SalesTaxCode', 'PurchasePrice', 'DiscountPercentage', 'MRP', 'StoreName', 'batchdescription', 'expirydate', 'CustomerCode', 'Customername', 'TransactionDate', 'BillDate', 'BNumber', 'BillAmount']
+2025-08-07 16:00:01,376 - INFO - 127.0.0.1 - - [07/Aug/2025 16:00:01] "GET /api/bill/W01000993 HTTP/1.1" 200 -

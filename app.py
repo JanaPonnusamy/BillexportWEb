@@ -144,7 +144,12 @@ def api_bill_detail(bill_no):
         selected = df[df['BNumber'] == bill_no]
         if selected.empty:
             return jsonify({'error': 'Bill not found'}), 404
-
+ # Sort by product name if column exists
+        if 'ProductName' in selected.columns:
+            selected = selected.sort_values(by='ProductName')
+        elif 'Product Name' in selected.columns:  # Handle alternative column name
+            selected = selected.sort_values(by='Product Name')
+        
         bill_date = selected['BillDate'].iloc[0] if 'BillDate' in selected.columns else 'N/A'
         bill_amount = selected['BillAmount'].iloc[0] if 'BillAmount' in selected.columns else 0.0
         html = selected.to_html(classes='table table-striped', index=False)
