@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, url_for, render_template, session, send_from_directory, jsonify
+from flask import Flask, request, redirect, render_template, session, send_from_directory, jsonify
 import os
 import json
 import pandas as pd
@@ -6,7 +6,7 @@ import logging
 import requests
 import csv
 import chardet
-import subprocess
+import time
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'
@@ -25,9 +25,10 @@ def load_users():
         return json.load(f)
 
 def load_bill_dataframe(filepath):
-    # Detect encoding
     if filepath.startswith("http"):
-        response = requests.get(filepath)
+        # Force fresh fetch each time (bypass GitHub cache)
+        url = f"{filepath}?t={int(time.time())}"
+        response = requests.get(url, headers={"Cache-Control": "no-cache"})
         response.raise_for_status()
         raw_data = response.content
         encoding = chardet.detect(raw_data)['encoding']
@@ -40,6 +41,9 @@ def load_bill_dataframe(filepath):
             content = f.read().replace('""', '"')
 
     # Save clean temp file
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.makedirs(UPLOAD_FOLDER)
+
     temp_path = os.path.join(UPLOAD_FOLDER, 'BillData_clean.csv')
     with open(temp_path, 'w', encoding=encoding) as f:
         f.write(content)
@@ -206,10 +210,8 @@ def trigger_fetch():
         return "Unauthorized", 403
 
     try:
-        # Step 1: Call VB.NET API to trigger export
         response = requests.get("http://122.252.246.181:8080/fetch", timeout=10)
         fetched_data = response.text
-
         return f"✅ VB.NET triggered. Status: {fetched_data}"
 
     except Exception as e:
