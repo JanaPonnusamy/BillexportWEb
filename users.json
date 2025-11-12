@@ -1,0 +1,44 @@
+{
+  "admin": {
+    "password": "jana",
+    "customername": "Admin",
+    "customercode": "0000000",
+    "phone": "9842683539"
+  },
+  "NMA": {
+    "password": "a123",
+    "customername": "NATHAN MEDICALS",
+    "customercode": "1000119",
+    "phone": "7598203319"
+  },
+  "NMG": {
+    "password": "g123",
+    "customername": "NATHAN MEDICALS G",
+    "customercode": "1002675",
+    "phone": "7358944319"
+  },
+  "NMS": {
+    "password": "s123",
+    "customername": "NATHAN MEDICALS S",
+    "customercode": "1000499",
+    "phone": "9965905319"
+  },
+  "NMV": {
+    "password": "v123",
+    "customername": "NATHAN MEDICALS VM",
+    "customercode": "1002096",
+    "phone": "8438064319"
+  },
+  "giri": {
+    "password": "giri",
+    "customername": "GIRI",
+    "customercode": "1002791",
+    "phone": "98426514360"
+  },
+  "drp": {
+    "password": "drp",
+    "customername": "DR.PRADEEP",
+    "customercode": "1002703",
+    "phone": "9578805888"
+  }
+}

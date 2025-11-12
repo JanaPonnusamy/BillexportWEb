@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nathan Login</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(145deg, #0f172a, #1e293b);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      color: #f1f5f9;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-box {
+      width: 850px;
+      max-width: 95%;
+      display: flex;
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(30, 41, 59, 0.95);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .form-left {
+      background: linear-gradient(to top, #0ea5e9, #22d3ee);
+      color: white;
+      flex: 1;
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .form-left img {
+      border-radius: 50%;
+      background: white;
+      padding: 8px;
+    }
+
+    .form-left h2 {
+      font-size: 2rem;
+      margin: 20px 0;
+    }
+
+    .form-left p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .form-right {
+      flex: 1.2;
+      padding: 40px;
+      background-color: rgba(15, 23, 42, 0.9);
+    }
+
+    .form-right h2 {
+      color: #f8fafc;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+      color: #cbd5e1;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid #334155;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #f1f5f9;
+      transition: border 0.3s;
+    }
+
+    .form-group input:focus {
+      border-color: #38bdf8;
+      outline: none;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .form-group.remember-me {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      padding-left: 2px;
+    }
+
+    .form-group.remember-me input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #38bdf8;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .form-right button {
+      padding: 12px 24px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .btn-login {
+      background: #38bdf8;
+      color: #0f172a;
+      font-weight: bold;
+    }
+
+    .btn-login:hover {
+      background: #0ea5e9;
+      transform: scale(1.03);
+    }
+
+    .btn-reset {
+      background: #334155;
+      color: #e2e8f0;
+    }
+
+    .btn-reset:hover {
+      background: #475569;
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 768px) {
+      .form-box {
+        flex-direction: column;
+      }
+
+      .form-left,
+      .form-right {
+        flex: none;
+        width: 100%;
+      }
+
+      .form-left {
+        padding: 20px;
+      }
+
+      .form-right {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="form-box">
+    <div class="form-left">
+      <img src="https://cdn-icons-png.flaticon.com/512/321/321817.png" width="80" alt="logo" />
+      <h2>Welcome to Nathan</h2>
+      <p>This website is used to export wholesale bills in Excel, CSV, and TXT formats.</p>
+    </div>
+    <div class="form-right">
+      <h2>User Login</h2>
+      <form method="POST" action="/">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Enter your username" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required />
+        </div>
+        <div class="form-group remember-me">
+          <input type="checkbox" id="remember" name="remember">
+          <label for="remember">Remember Me</label>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn-login">Login</button>
+          <button type="button" class="btn-reset" id="resetBtn">Reset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const rememberCheckbox = document.getElementById("remember");
+
+    // Step 1: Load all remembered users
+    const rememberedUsers = JSON.parse(localStorage.getItem("rememberedUsers") || "{}");
+
+    // Step 2: If coming from logout, clear all inputs
+    const urlParams = new URLSearchParams(window.location.search);
+    const isLogout = urlParams.get("logout") === "1";
+
+    if (isLogout) {
+      // Clear fields and checkbox
+      usernameInput.value = "";
+      passwordInput.value = "";
+      rememberCheckbox.checked = false;
+    } else {
+      // Optionally prefill last remembered user
+      const lastUsedUsername = Object.keys(rememberedUsers)[0] || "";
+      if (lastUsedUsername) {
+        usernameInput.value = lastUsedUsername;
+        passwordInput.value = rememberedUsers[lastUsedUsername];
+        rememberCheckbox.checked = true;
+      }
+    }
+
+    // Step 3: Handle input changes
+    usernameInput.addEventListener("input", function () {
+      const typedUsername = usernameInput.value.trim();
+      if (rememberedUsers[typedUsername]) {
+        passwordInput.value = rememberedUsers[typedUsername];
+        rememberCheckbox.checked = true;
+      } else {
+        passwordInput.value = "";
+        rememberCheckbox.checked = false;
+      }
+    });
+
+    // Step 4: On submit, save if needed
+    document.querySelector("form").addEventListener("submit", function () {
+      const username = usernameInput.value.trim();
+      const password = passwordInput.value;
+      if (rememberCheckbox.checked && username !== "") {
+        rememberedUsers[username] = password;
+        localStorage.setItem("rememberedUsers", JSON.stringify(rememberedUsers));
+      } else {
+        delete rememberedUsers[username];
+        localStorage.setItem("rememberedUsers", JSON.stringify(rememberedUsers));
+      }
+    });
+
+    // Step 5: Reset button
+    document.getElementById("resetBtn").addEventListener("click", function () {
+      usernameInput.value = "";
+      passwordInput.value = "";
+      rememberCheckbox.checked = false;
+    });
+  });
+</script>
+
+
+</body>
+</html>
